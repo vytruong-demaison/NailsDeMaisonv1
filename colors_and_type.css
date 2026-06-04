@@ -1,0 +1,163 @@
+/* ============================================================
+   NAILS DE MAISON — Colors & Type
+   A French-inspired "maison" of nail care. Editorial, calm,
+   feminine. Soft warm plum + cream with pretty nail-polish
+   accents (dusty rose, blush, mauve) and a whisper of laurel
+   sage. Type: classical Roman serif + geometric sans.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap');
+
+:root {
+  /* ---- Core palette ---------------------------------------- */
+  --ink:        #3A2A33;   /* soft warm plum — the "dark" (not black)        */
+  --ink-soft:   #4E3A45;   /* softened plum for secondary dark surfaces      */
+  --espresso:   #614A57;   /* warm mauve-plum, hovers on dark               */
+
+  --ivory:      #F7EFEA;   /* signature warm rosé cream — light surface      */
+  --paper:      #FCF7F3;   /* lightest rosé paper, page background           */
+  --linen:      #EFE0DA;   /* dusty rosé linen, panels & dividers on light   */
+
+  --blush:      #ECC9C8;   /* soft blush pink — accent, fills                */
+  --blush-deep: #D49DA0;   /* deeper rose for emphasis                       */
+
+  --rose:       #C27E8C;   /* dusty rose — PRIMARY accent (nail-polish)      */
+  --rose-deep:  #9A536A;   /* deep mauve-rose, accent text on cream          */
+  --rose-pale:  #E6BDC2;   /* pale rose wash                                 */
+  --mauve:      #A88597;   /* muted mauve, supporting tone                   */
+  --plum:       #6E4A5C;   /* deep plum, rich accents                        */
+
+  --sage:       #8B9079;   /* laurel sage — botanical secondary (sparingly)  */
+  --sage-deep:  #5E6450;   /* deep laurel                                    */
+  --sage-pale:  #C7CAB8;   /* pale sage wash                                 */
+
+  --brass:      #BE9A6A;   /* soft gold/brass — hairlines, fine detail      */
+
+  /* ---- Semantic surface / text ----------------------------- */
+  --bg:           var(--paper);
+  --surface:      var(--ivory);
+  --surface-ink:  var(--ink);
+  --fg1:          var(--ink);      /* primary text                          */
+  --fg2:          #6A5560;         /* secondary / muted body (warm mauve)   */
+  --fg3:          #9A8590;         /* tertiary, captions, meta              */
+  --fg-on-ink:    var(--ivory);    /* text on dark surfaces                 */
+  --fg-on-ink-2:  #CBB6C0;         /* muted rose text on plum               */
+
+  --line:         #E7D6D2;         /* rosé hairline divider on light        */
+  --line-ink:     #4C3944;         /* hairline divider on dark              */
+  --accent:       var(--rose);
+  --accent-ink:   var(--rose-deep);
+
+  /* ---- Type families --------------------------------------- */
+  --font-display: 'Marcellus', 'Times New Roman', serif;       /* classical Roman caps & headlines */
+  --font-serif:   'Cormorant Garamond', Georgia, serif;        /* editorial body / pull quotes     */
+  --font-sans:    'Jost', 'Helvetica Neue', Arial, sans-serif; /* UI, labels, body                 */
+
+  /* ---- Type scale (fluid-ish, px base) --------------------- */
+  --t-display:  clamp(3.5rem, 8vw, 7rem);   /* hero display          */
+  --t-h1:       clamp(2.5rem, 5vw, 4rem);
+  --t-h2:       clamp(1.9rem, 3.2vw, 2.75rem);
+  --t-h3:       1.5rem;
+  --t-lead:     1.375rem;   /* serif lead paragraphs */
+  --t-body:     1.0625rem;
+  --t-small:    0.9375rem;
+  --t-eyebrow:  0.78rem;    /* tracked label         */
+
+  /* ---- Spacing scale --------------------------------------- */
+  --s-1: 4px;   --s-2: 8px;   --s-3: 12px;  --s-4: 16px;
+  --s-5: 24px;  --s-6: 32px;  --s-7: 48px;  --s-8: 64px;
+  --s-9: 96px;  --s-10: 128px; --s-11: 160px;
+
+  /* ---- Radii (restrained, mostly soft) --------------------- */
+  --r-xs: 2px;   --r-sm: 6px;   --r-md: 12px;  --r-lg: 20px;
+  --r-pill: 999px;
+
+  /* ---- Shadows (soft, warm, low) --------------------------- */
+  --shadow-sm: 0 1px 2px rgba(58,42,51,0.06);
+  --shadow-md: 0 12px 30px -16px rgba(58,42,51,0.22);
+  --shadow-lg: 0 40px 80px -40px rgba(58,42,51,0.40);
+
+  /* ---- Motion ---------------------------------------------- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);   /* gentle ease-out      */
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur: 480ms;
+  --dur-fast: 240ms;
+}
+
+/* ============================================================
+   Base element styles — drop these in to inherit the system
+   ============================================================ */
+
+.ndm-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--t-eyebrow);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.ndm-display {
+  font-family: var(--font-display);
+  font-size: var(--t-display);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  color: var(--fg1);
+  font-weight: 400;
+}
+
+h1, .ndm-h1 {
+  font-family: var(--font-display);
+  font-size: var(--t-h1);
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+  color: var(--fg1);
+}
+
+h2, .ndm-h2 {
+  font-family: var(--font-display);
+  font-size: var(--t-h2);
+  line-height: 1.08;
+  font-weight: 400;
+  color: var(--fg1);
+}
+
+h3, .ndm-h3 {
+  font-family: var(--font-sans);
+  font-size: var(--t-h3);
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--fg1);
+}
+
+.ndm-lead {
+  font-family: var(--font-serif);
+  font-size: var(--t-lead);
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--fg2);
+}
+
+p, .ndm-body {
+  font-family: var(--font-sans);
+  font-size: var(--t-body);
+  line-height: 1.65;
+  font-weight: 300;
+  color: var(--fg2);
+}
+
+.ndm-small {
+  font-family: var(--font-sans);
+  font-size: var(--t-small);
+  line-height: 1.55;
+  color: var(--fg3);
+}
+
+/* price / numerals — display serif looks lovely on prices */
+.ndm-price {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--fg1);
+}
