@@ -15,8 +15,7 @@ Just open `index.html` in a browser. (For the Square booking calendar to load,
 the site must be served over **https** — it works once deployed, see below.)
 
 ## Deploy
-This is a static site — it can be hosted free on **GitHub Pages**, **Netlify**, or
-**Cloudflare Pages**. See deployment notes shared separately.
+This is a static site — **Netlify**
 
 ## Contact
 3264 Buford Dr, Suite 100-B, Buford, GA 30519 · (470) 899-8068

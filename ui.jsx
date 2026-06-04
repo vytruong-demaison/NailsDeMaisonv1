@@ -8,6 +8,7 @@ const ICONS = {
   clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
   instagram: '<rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>',
   facebook: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>',
+  google: '<path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81Z"/>',
   arrowRight: '<line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/>',
   arrowUpRight: '<line x1="7" x2="17" y1="17" y2="7"/><polyline points="7 7 17 7 17 17"/>',
   chevronLeft: '<polyline points="15 18 9 12 15 6"/>',
@@ -22,6 +23,10 @@ function Icon({ name, className = 'ic', star }) {
   if (star) {
     return (<svg className={className} viewBox="0 0 24 24" fill="currentColor" stroke="none">
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>);
+  }
+  if (name === 'google') {
+    return (<svg className={className} viewBox="0 0 24 24" fill="currentColor" stroke="none"
+      dangerouslySetInnerHTML={{ __html: ICONS[name] }} />);
   }
   return (<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor"
     strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
@@ -94,6 +99,7 @@ const NDM = {
   ],
   instagram: 'https://www.instagram.com/nailsdemaison/',
   facebook: 'https://www.facebook.com/profile.php?id=61583965245358',
+  google: 'https://www.google.com/search?q=nailsdemaison&oq=nailsdemaison&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgkIARAAGA0YgAQyDwgCEC4YDRivARjHARiABDIJCAMQABgNGIAEMgkIBBAAGA0YgAQyBggFEEUYPDIGCAYQRRg9MgYIBxBFGD3SAQgyNDE2ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8',
   mapSrc: 'https://maps.google.com/maps?q=3264%20Buford%20Dr%2C%20Buford%2C%20GA%2030519&t=m&z=15&output=embed&iwloc=near',
 };
 

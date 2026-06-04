@@ -91,6 +91,7 @@ function Footer() {
             <div className="footer-socials">
               <a href={NDM.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><Icon name="instagram" /></a>
               <a href={NDM.facebook} target="_blank" rel="noreferrer" aria-label="Facebook"><Icon name="facebook" /></a>
+              <a href={NDM.google} target="_blank" rel="noreferrer" aria-label="Google"><Icon name="google" /></a>
             </div>
           </div>
           <div className="footer-col">
