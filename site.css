@@ -136,7 +136,9 @@ html.anim .reveal.in { transform: none; }
    HERO
    ============================================================ */
 .hero {
-  min-height: 100svh;
+  /* Slightly under a full screen so the dark marquee strip peeks above the
+     fold — a quiet signal that the page continues. */
+  min-height: 90svh;
   background: #F2DCD8;
   color: var(--ink);
   display: flex; flex-direction: column;
@@ -175,6 +177,24 @@ html.anim .reveal.in { transform: none; }
 }
 .hero-meta span { display: inline-flex; align-items: center; gap: 9px; }
 .hero-meta .ic { width: 15px; height: 15px; color: var(--rose); }
+
+/* scroll cue — sits just above the meta row, gently inviting a scroll down */
+.hero-scroll {
+  position: relative; z-index: 2; flex: none;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 0; margin-bottom: 60px; text-decoration: none;
+  transition: opacity var(--dur-fast) var(--ease-soft);
+}
+.hero-scroll .lbl {
+  font-family: var(--font-sans); font-weight: 500;
+  font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--rose-deep);
+}
+.hero-scroll .ic { width: 22px; height: 22px; color: var(--plum); }
+.hero-scroll:hover .ic { color: var(--rose-deep); }
+html.anim .hero-scroll .ic { animation: ndm-bob 1.7s var(--ease-soft) infinite; }
+@keyframes ndm-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+@media (prefers-reduced-motion: reduce) { html.anim .hero-scroll .ic { animation: none; } }
 
 /* ============================================================
    MARQUEE strip

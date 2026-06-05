@@ -29,6 +29,10 @@ function Hero() {
           <Button variant="outline" href="#services" icon="arrowRight">View Services</Button>
         </Reveal>
       </div>
+      <a className="hero-scroll" href="#about" aria-label="Scroll to explore">
+        <span className="lbl">Explore</span>
+        <Icon name="chevronDown" className="ic" />
+      </a>
       <div className="hero-meta">
         <span><Icon name="mapPin" /> 3264 Buford Dr</span>
         <span><Icon name="clock" /> Today · {todayHours()}</span>

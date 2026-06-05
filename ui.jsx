@@ -13,6 +13,7 @@ const ICONS = {
   arrowUpRight: '<line x1="7" x2="17" y1="17" y2="7"/><polyline points="7 7 17 7 17 17"/>',
   chevronLeft: '<polyline points="15 18 9 12 15 6"/>',
   chevronRight: '<polyline points="9 18 15 12 9 6"/>',
+  chevronDown: '<polyline points="6 9 12 15 18 9"/>',
   menu: '<line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/>',
   x: '<line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/>',
   calendar: '<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>',
@@ -149,8 +150,7 @@ const REVIEWS = [
   },
   {
     stars: 5,
-    // TODO: this reviewer's name was cut off in the screenshot — replace with the real name.
-    name: 'A Maison guest',
+    name: 'Amy N',
     text: "Not gonna lie, I don't usually write reviews but this salon is worth it. Everything feels clean and organized. The staff are professional but still very friendly, which I appreciate. Really smooth, comfortable experience. I definitely will be back!",
   },
 ];
