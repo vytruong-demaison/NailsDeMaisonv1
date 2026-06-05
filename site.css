@@ -644,13 +644,7 @@ html.anim .hero-emblem {
           mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
 }
 
-/* ---- ABOUT: an editorial drop-cap opens the story ----------- */
-.about-copy .ndm-lead::first-letter {
-  font-family: var(--font-display);
-  font-size: 3.5em; line-height: 0.72;
-  float: left; margin: 8px 12px 0 0;
-  color: var(--rose-deep);
-}
+/* ---- ABOUT figure ------------------------------------------ */
 .about-figure img {
   box-shadow: var(--shadow-lg);
   transition: transform 0.9s var(--ease);
