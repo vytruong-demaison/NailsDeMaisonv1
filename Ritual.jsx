@@ -2,9 +2,9 @@
 function Ritual() {
   const steps = [
     ['01', 'Welcome', 'You are greeted, seated, and offered a moment to settle before we begin.'],
-    ['02', 'Consult', 'We listen to what you need that day — shape, shade, the feeling you are after.'],
+    ['02', 'Consult', 'We listen to what you need that day: shape, shade, the feeling you are after.'],
     ['03', 'Care', 'Every step is unhurried and precise, from soak to the final, flawless coat.'],
-    ['04', 'Finish', 'You leave restored — hands and feet cared for, the day a little softer.'],
+    ['04', 'Finish', 'You leave restored. Hands and feet cared for, the day a little softer.'],
   ];
   return (
     <section className="ritual" id="ritual">

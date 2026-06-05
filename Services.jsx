@@ -45,7 +45,7 @@ function Services() {
         </Reveal>
 
         <Reveal className="services-note" delay={160}>
-          <span className="ndm-small">Gel add-ons, soak-off, and nail art available — ask your technician.</span>
+          <span className="ndm-small">Gel extras, soak off, and nail art available. Ask your technician.</span>
           <Button variant="solid" icon="calendar" onClick={() => openBooking()}>Reserve your visit</Button>
         </Reveal>
       </div>

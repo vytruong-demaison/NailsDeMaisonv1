@@ -278,7 +278,7 @@ html.anim .reveal.in { transform: none; }
 .shade { position: relative; aspect-ratio: 3/4; border-radius: var(--r-md); overflow: hidden; cursor: pointer; }
 .shade img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }
 .shade:hover img { transform: scale(1.07); }
-.shade::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(46,33,42,0.62)); opacity: 0; transition: opacity var(--dur) var(--ease-soft); }
+.shade::after { content: ""; position: absolute; inset: 0; background: rgba(46,33,42,0.14); opacity: 0; transition: opacity var(--dur) var(--ease-soft); }
 .shade:hover::after { opacity: 1; }
 .shade .cap {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
@@ -312,6 +312,54 @@ html.anim .reveal.in { transform: none; }
 .quote .who { margin-top: 30px; font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
 .quote .stars { color: var(--brass); margin-top: 26px; display: flex; justify-content: center; gap: 7px; }
 .quote .stars .ic { width: 17px; height: 17px; }
+
+/* ---- Reviews carousel (crossfade stack of curated Google reviews) ---- */
+.quote .rev-stage { position: relative; min-height: clamp(232px, 30vh, 296px); margin-top: 2px; }
+.quote .rev-card {
+  position: absolute; inset: 0; margin: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity 0.7s var(--ease-soft), transform 0.7s var(--ease-soft), visibility 0s linear 0.7s;
+}
+.quote .rev-card.on { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.quote .rev-card .stars { margin-top: 0; }
+.quote .rev-card blockquote {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: clamp(1.25rem, 2.3vw, 1.78rem); line-height: 1.5;
+  max-width: 40ch; margin: 22px auto 0; color: var(--espresso); text-wrap: balance;
+}
+.quote .rev-card .who { margin-top: 24px; font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
+
+.quote .rev-source {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 28px;
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg3);
+  transition: color var(--dur-fast) var(--ease-soft);
+}
+.quote .rev-source:hover { color: var(--rose-deep); }
+.quote .rev-source .ic { width: 15px; height: 15px; }
+
+.quote .rev-ctrl { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 22px; }
+.quote .rev-arrow {
+  width: 42px; height: 42px; flex: none; border-radius: 50%;
+  border: 1px solid var(--blush-deep); background: transparent; color: var(--espresso);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-soft), color var(--dur-fast) var(--ease-soft), border-color var(--dur-fast) var(--ease-soft);
+}
+.quote .rev-arrow:hover { background: var(--espresso); color: var(--blush); border-color: var(--espresso); }
+.quote .rev-arrow .ic { width: 18px; height: 18px; }
+.quote .rev-dots { display: flex; align-items: center; gap: 10px; }
+.quote .rev-dot {
+  width: 8px; height: 8px; padding: 0; border: none; border-radius: 50%; cursor: pointer;
+  background: var(--blush-deep); opacity: 0.45;
+  transition: opacity var(--dur-fast) var(--ease-soft), transform var(--dur-fast) var(--ease-soft), background var(--dur-fast) var(--ease-soft);
+}
+.quote .rev-dot:hover { opacity: 0.8; }
+.quote .rev-dot.on { opacity: 1; transform: scale(1.45); background: var(--brass); }
+
+@media (prefers-reduced-motion: reduce) {
+  .quote .rev-card { transition: opacity 0.2s linear, visibility 0s linear 0.2s; transform: none; }
+  .quote .rev-card.on { transition-delay: 0s; }
+}
 
 /* ============================================================
    BOOKING
@@ -515,3 +563,162 @@ html.anim .reveal.in { transform: none; }
   .bm-slots { grid-template-columns: repeat(3, 1fr); }
   .bm-fields { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   ATELIER REFINEMENTS
+   A quiet finishing layer — atmosphere, depth, and the small
+   details that read as "designed." Built on the existing
+   tokens; respects the motion contract (transform-only
+   entrances, nothing hidden by opacity, reduced-motion safe).
+   ============================================================ */
+
+/* ---- Brand-level polish: selection, caret, scrollbar, focus -- */
+::selection { background: var(--rose); color: var(--ivory); }
+::-moz-selection { background: var(--rose); color: var(--ivory); }
+html { scrollbar-color: var(--mauve) transparent; }
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: var(--linen); }
+::-webkit-scrollbar-thumb {
+  background: var(--mauve); border-radius: var(--r-pill);
+  border: 3px solid var(--linen);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--rose); }
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px; border-radius: var(--r-xs);
+}
+a:focus-visible, .btn:focus-visible { outline-offset: 4px; }
+
+/* ---- Filmic grain: a whisper of warmth over the whole page --- */
+/* Fixed, non-interactive. Multiplies softly into the rosé paper
+   so flat fills gain a hand-printed, editorial texture.        */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 9000;
+  pointer-events: none; mix-blend-mode: multiply; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-reduced-motion: reduce) { body::after { opacity: 0.035; } }
+
+/* ---- Buttons: a touch of lift + warmth on hover -------------- */
+.btn { position: relative; }
+.btn-solid:hover, .btn-sage:hover, .btn-cream:hover,
+.btn-outline:hover, .btn-outline-cream:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.btn:active { transform: translateY(0) scale(0.975); box-shadow: none; }
+
+/* ---- HERO: a framed plate of light -------------------------- */
+/* Soft radial glow blooms behind the headline for depth...      */
+.hero-inner::before {
+  content: ""; position: absolute; z-index: -1;
+  left: 50%; top: 42%; transform: translate(-50%, -50%);
+  width: min(880px, 92vw); height: min(620px, 70vh);
+  background:
+    radial-gradient(ellipse at center,
+      rgba(247,239,234,0.55) 0%,
+      rgba(236,201,200,0.30) 38%,
+      rgba(242,220,216,0) 72%);
+  pointer-events: none;
+}
+/* ...and a fine brass passe-partout frames the whole plate,
+   like a print floated inside a gallery mount.                 */
+.hero::after {
+  content: ""; position: absolute; inset: 24px; z-index: 1;
+  border: 1px solid rgba(190,154,106,0.30);
+  pointer-events: none;
+}
+@media (max-width: 600px) { .hero::after { inset: 14px; } }
+
+/* Emblem: settle in, then breathe ever so slightly. */
+html.anim .hero-emblem {
+  animation: ndm-float 6.5s var(--ease-soft) 1.2s infinite;
+  filter: drop-shadow(0 8px 18px rgba(58,42,51,0.18));
+}
+@keyframes ndm-float { 50% { transform: translateY(-7px); } }
+@media (prefers-reduced-motion: reduce) { html.anim .hero-emblem { animation: none; } }
+
+/* ---- MARQUEE: fade the words into the edges ------------------ */
+.strip {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+/* ---- ABOUT: an editorial drop-cap opens the story ----------- */
+.about-copy .ndm-lead::first-letter {
+  font-family: var(--font-display);
+  font-size: 3.5em; line-height: 0.72;
+  float: left; margin: 8px 12px 0 0;
+  color: var(--rose-deep);
+}
+.about-figure img {
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.9s var(--ease);
+}
+.about-figure:hover img { transform: scale(1.015); }
+
+/* ---- RITUAL: lift the dark band with a low rose glow --------- */
+.ritual { overflow: hidden; }
+.ritual::before {
+  content: ""; position: absolute; z-index: 0;
+  left: 50%; top: -10%; transform: translateX(-50%);
+  width: 70%; height: 60%;
+  background: radial-gradient(ellipse at center,
+    rgba(194,126,140,0.20), rgba(58,42,51,0) 70%);
+  pointer-events: none;
+}
+.ritual > .wrap { position: relative; z-index: 1; }
+.step .no { transition: color var(--dur) var(--ease-soft); }
+.step:hover .no { color: var(--rose); }
+
+/* ---- QUOTE: a grander mark, floated as a watermark ---------- */
+.quote { overflow: hidden; }
+.quote .mark {
+  font-size: clamp(4rem, 9vw, 6.5rem);
+  opacity: 0.85; margin-bottom: -8px;
+}
+
+/* ---- GALLERY: warmer shade plates + finer overlay ----------- */
+.shade { box-shadow: var(--shadow-md); }
+.shade .cap .nm { letter-spacing: 0.01em; }
+
+/* ---- MAP: greyscale at rest, blooms into color on hover ----- */
+.map-embed { transition: filter 0.7s var(--ease-soft); }
+.map-embed:hover { filter: grayscale(0) sepia(0); }
+
+/* ---- FOOTER: social discs lift to a brass ring -------------- */
+.footer-socials a:hover {
+  transform: translateY(-3px);
+  border-color: var(--brass);
+  box-shadow: 0 12px 24px -14px rgba(0,0,0,0.55);
+}
+
+/* ============================================================
+   BOOKING CALENDAR — extra states for the branded flow
+   (chips/grid/slots/fields already styled above; these cover
+   loading, empty, price tags, and the call-us fallback)
+   ============================================================ */
+.bm-chip .px { color: var(--fg3); margin-left: 8px; font-size: 0.82em; }
+.bm-chip.sel .px { color: var(--rose-pale); }
+
+.bm-slots-msg {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.9rem; color: var(--fg2); padding: 10px 0 2px;
+}
+.bm-slots-msg .bm-spinner { width: 18px; height: 18px; border-width: 2px; }
+
+.bm-linkbtn {
+  background: none; border: none; padding: 0; font: inherit;
+  color: var(--rose-deep); text-decoration: underline; text-underline-offset: 2px;
+  cursor: pointer;
+}
+.bm-linkbtn:hover { color: var(--ink); }
+
+.bm-error {
+  margin-top: 18px; padding: 14px 16px;
+  border: 1px solid var(--line); border-radius: var(--r-sm);
+  background: var(--linen); color: var(--ink);
+  font-size: 0.9rem; line-height: 1.55;
+}
+.bm-error a { color: var(--rose-deep); text-decoration: underline; text-underline-offset: 2px; }
+.bm-error a:hover { color: var(--ink); }

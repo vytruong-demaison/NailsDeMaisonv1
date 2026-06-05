@@ -10,7 +10,7 @@ function Header() {
   }, []);
   const links = [
     ['About', '#about'], ['Services', '#services'], ['The Visit', '#ritual'],
-    ['Shades', '#gallery'], ['Visit Us', '#booking'],
+    ['Our Work', '#gallery'], ['Visit Us', '#booking'],
   ];
   return (<>
     <header className={`hdr ${scrolled ? 'scrolled' : ''}`}>

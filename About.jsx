@@ -16,7 +16,7 @@ function About() {
     <section className="about" id="about">
       <div className="wrap about-grid">
         <Reveal className="about-figure">
-          <img src="assets/photos/about.jpg" alt="Nails De Maison — nail artistry" />
+          <img src="assets/photos/about.jpg" alt="Nails De Maison nail artistry" />
           <div className="tag">est. Buford</div>
         </Reveal>
         <Reveal as="div" className="about-copy">
@@ -29,7 +29,7 @@ function About() {
           <p>
             We pay close attention to what each guest needs, so every service feels clear,
             comfortable, and thoughtfully prepared. Our team approaches every detail with steady
-            focus — ensuring your visit carries the feeling of being welcomed into a house that
+            focus, ensuring your visit carries the feeling of being welcomed into a house that
             values ease, comfort, and personal expression.
           </p>
           <div className="about-sign">

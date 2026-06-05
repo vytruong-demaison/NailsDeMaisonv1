@@ -1,15 +1,62 @@
 /* Closing.jsx — quote, booking, footer */
 function Quote() {
+  const [i, setI] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const n = REVIEWS.length;
+  const go = (d) => setI((p) => (p + d + n) % n);
+
+  // Auto-advance, paused on hover/focus and when the guest prefers reduced motion.
+  useEffect(() => {
+    if (paused || n <= 1) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const t = setInterval(() => setI((p) => (p + 1) % n), 7000);
+    return () => clearInterval(t);
+  }, [paused, n]);
+
+  // Touch swipe on mobile.
+  const touchX = useRef(null);
+  const onTouchStart = (e) => { touchX.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (touchX.current == null) return;
+    const dx = e.changedTouches[0].clientX - touchX.current;
+    if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+    touchX.current = null;
+  };
+
   return (
-    <section className="quote">
+    <section className="quote" id="reviews"
+      onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)} onBlurCapture={() => setPaused(false)}>
       <div className="wrap-tight">
         <Reveal>
           <div className="mark">“</div>
-          <blockquote>Like being welcomed into a house that values ease and comfort.</blockquote>
-          <div className="stars" aria-label="Five stars">
-            <Icon name="star" star /><Icon name="star" star /><Icon name="star" star /><Icon name="star" star /><Icon name="star" star />
+
+          <div className="rev-stage" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+            {REVIEWS.map((r, k) => (
+              <figure key={k} className={`rev-card ${k === i ? 'on' : ''}`} aria-hidden={k === i ? undefined : true}>
+                <div className="stars" aria-label={`${r.stars} out of 5 stars`}>
+                  {Array.from({ length: r.stars }).map((_, s) => <Icon key={s} name="star" star />)}
+                </div>
+                <blockquote>{r.text}</blockquote>
+                <figcaption className="who">{r.name}</figcaption>
+              </figure>
+            ))}
           </div>
-          <div className="who">A Nails De Maison guest</div>
+
+          <a className="rev-source" href={NDM.google} target="_blank" rel="noreferrer">
+            <Icon name="google" /><span>Reviews from Google</span>
+          </a>
+
+          <div className="rev-ctrl">
+            <button className="rev-arrow" onClick={() => go(-1)} aria-label="Previous review"><Icon name="chevronLeft" /></button>
+            <div className="rev-dots">
+              {REVIEWS.map((_, k) => (
+                <button key={k} className={`rev-dot ${k === i ? 'on' : ''}`}
+                  aria-label={`Show review ${k + 1}`} aria-current={k === i} onClick={() => setI(k)} />
+              ))}
+            </div>
+            <button className="rev-arrow" onClick={() => go(1)} aria-label="Next review"><Icon name="chevronRight" /></button>
+          </div>
         </Reveal>
       </div>
     </section>
@@ -25,7 +72,7 @@ function Booking() {
           <Reveal delay={70}><h2>We would love<br />to have you.</h2></Reveal>
           <Reveal delay={130}>
             <p className="booking-lead ndm-lead">
-              Reserve online in a few taps — pick your service and time and you'll get a text
+              Reserve online in a few taps. Pick your service and time and you'll get a text
               confirmation. Walk-ins are always welcome whenever a chair is open.
             </p>
           </Reveal>
@@ -42,8 +89,8 @@ function Booking() {
               <div className="info-row">
                 <Icon name="clock" />
                 <div><div className="lbl">Hours</div>
-                  <div className="val">Mon–Sat 10a–7p</div>
-                  <div className="val" style={{ fontSize: '1rem', color: 'var(--fg2)' }}>Sun 12p–5p</div>
+                  <div className="val">Mon–Sat 10am–7pm</div>
+                  <div className="val" style={{ fontSize: '1rem', color: 'var(--fg2)' }}>Sun 12pm–5pm</div>
                 </div>
               </div>
             </div>
@@ -54,7 +101,7 @@ function Booking() {
           <div className="bg"></div>
           <Eyebrow onInk>Reservations</Eyebrow>
           <h3>Book your visit</h3>
-          <p>Choose your service and a time that suits you — you'll get a confirmation by text.</p>
+          <p>Choose your service and a time that suits you. You'll get a confirmation by text.</p>
           <Button variant="cream" icon="calendar" onClick={() => openBooking()}>Book online</Button>
           <div className="hrs">
             {NDM.hours.map(([d, h]) => <div key={d}><span>{d}</span><span>{h}</span></div>)}
@@ -85,8 +132,7 @@ function Footer() {
               <span className="bn">NAILS DE MAISON</span>
             </a>
             <p className="footer-blurb">
-              A French-inspired house of nail care in Buford, Georgia — where every visit is
-              shaped with intention.
+            A premier nail salon in Buford, Georgia, where every service is delivered with care and intention.
             </p>
             <div className="footer-socials">
               <a href={NDM.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><Icon name="instagram" /></a>
@@ -99,7 +145,7 @@ function Footer() {
             <a href="#about">The House</a>
             <a href="#services">Services</a>
             <a href="#ritual">The Visit</a>
-            <a href="#gallery">Shades</a>
+            <a href="#gallery">Our Work</a>
             <a href="#booking">Visit Us</a>
           </div>
           <div className="footer-col">
@@ -107,7 +153,7 @@ function Footer() {
             <a href={NDM.phoneHref}>{NDM.phone}</a>
             <a href={`mailto:${NDM.email}`}>Email us</a>
             <p>{NDM.address}</p>
-            <p>Mon–Sat 10a–7p · Sun 12p–5p</p>
+            <p>Mon–Sat 10am–7pm · Sun 12pm–5pm</p>
           </div>
         </div>
         <div className="footer-bottom">

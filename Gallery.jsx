@@ -19,8 +19,8 @@ function Gallery() {
       <div className="wrap">
         <div className="gallery-head">
           <Reveal>
-            <Eyebrow>The Shades</Eyebrow>
-            <h2>A palette to choose from.</h2>
+            <Eyebrow>Our Work</Eyebrow>
+            <h2>Straight from our Instagram.</h2>
           </Reveal>
           <Reveal delay={80}>
             <Button variant="outline" href={NDM.instagram} icon="instagram" target="_blank" rel="noreferrer">
@@ -31,12 +31,8 @@ function Gallery() {
 
         <div className="grid-shades">
           {SHADES.map((s, i) => (
-            <Reveal className="shade" key={s.nm} delay={(i % 6) * 60} onClick={() => setOpen(i)}>
-              <img src={s.src} alt={s.nm} />
-              <div className="cap">
-                <div className="fin">{s.fin}</div>
-                <div className="nm">{s.nm}</div>
-              </div>
+            <Reveal className="shade" key={s.src} delay={(i % 6) * 60} onClick={() => setOpen(i)}>
+              <img src={s.src} alt={`Nails De Maison nail work ${i + 1}`} loading="lazy" />
             </Reveal>
           ))}
         </div>
@@ -48,11 +44,7 @@ function Gallery() {
           <button className="lb-nav lb-prev" aria-label="Previous" onClick={(e) => { e.stopPropagation(); go(-1); }}><Icon name="chevronLeft" /></button>
           <button className="lb-nav lb-next" aria-label="Next" onClick={(e) => { e.stopPropagation(); go(1); }}><Icon name="chevronRight" /></button>
           <div className="lb-card" onClick={(e) => e.stopPropagation()}>
-            <img src={SHADES[open].src} alt={SHADES[open].nm} />
-            <div className="meta">
-              <div className="nm">{SHADES[open].nm}</div>
-              <div className="fin">{SHADES[open].fin}</div>
-            </div>
+            <img src={SHADES[open].src} alt={`Nails De Maison nail work ${open + 1}`} />
           </div>
         </>)}
       </div>

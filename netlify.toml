@@ -1,0 +1,16 @@
+# Netlify configuration for Nails De Maison
+# Static site (published from repo root) + serverless booking API.
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Same-origin API: the frontend fetches /api/* and Netlify rewrites those
+# requests to the matching serverless function (/api/book -> book.js, etc.).
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[functions]
+  node_bundler = "esbuild"

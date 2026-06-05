@@ -109,8 +109,8 @@ const SERVICES = {
     rows: [
       { name: 'Classic Manicure', price: '$20', desc: 'Shape, cuticle care, a flawless coat of polish.' },
       { name: 'Deluxe', price: '$30', desc: 'Classic care with exfoliation & a warm hand massage.' },
-      { name: 'Gel Manicure', price: '$35', desc: 'High-shine gel that keeps its luster for weeks.' },
-      { name: 'Signature', price: '$40', desc: 'The full maison ritual — every thoughtful touch.' },
+      { name: 'Gel Manicure', price: '$35', desc: 'High shine gel that keeps its luster for weeks.' },
+      { name: 'Signature', price: '$40', desc: 'The full maison ritual, every thoughtful touch.' },
     ],
   },
   pedicure: {
@@ -127,10 +127,32 @@ const SERVICES = {
 const SHADES = [
   { src: 'assets/photos/shade-french.jpg', nm: 'French Ombré', fin: 'Gel' },
   { src: 'assets/photos/shade-bow.jpg', nm: 'Ballet Bow', fin: 'Gel · 3D' },
-  { src: 'assets/photos/shade-hearts.jpg', nm: 'Sweetheart', fin: 'Hand-painted' },
-  { src: 'assets/photos/shade-floral.jpg', nm: 'Wildflower', fin: 'Hand-painted' },
+  { src: 'assets/photos/shade-hearts.jpg', nm: 'Sweetheart', fin: 'Hand painted' },
+  { src: 'assets/photos/shade-floral.jpg', nm: 'Wildflower', fin: 'Hand painted' },
   { src: 'assets/photos/shade-chrome.jpg', nm: 'Silver Marble', fin: 'Chrome' },
-  { src: 'assets/photos/shade-leopard.jpg', nm: 'Cherry Leopard', fin: 'Hand-painted' },
+  { src: 'assets/photos/shade-leopard.jpg', nm: 'Cherry Leopard', fin: 'Hand painted' },
 ];
 
-Object.assign(window, { useState, useEffect, useRef, Icon, Button, Eyebrow, Reveal, Brand, NDM, SERVICES, SHADES, openBooking });
+/* ---- Curated Google reviews (real, hand-picked) ----
+   To add a new review: copy a card below — text, name, stars (1–5).
+   Keep the wording exactly as the guest wrote it. */
+const REVIEWS = [
+  {
+    stars: 5,
+    name: 'Lanla Pham',
+    text: "Very clean, friendly, and professional. I love this place and I'll definitely come back!",
+  },
+  {
+    stars: 5,
+    name: 'Amanda Nunez',
+    text: "My first time getting my nails done in years and I LOVE them!! The shape and the color so beautiful!!",
+  },
+  {
+    stars: 5,
+    // TODO: this reviewer's name was cut off in the screenshot — replace with the real name.
+    name: 'A Maison guest',
+    text: "Not gonna lie, I don't usually write reviews but this salon is worth it. Everything feels clean and organized. The staff are professional but still very friendly, which I appreciate. Really smooth, comfortable experience. I definitely will be back!",
+  },
+];
+
+Object.assign(window, { useState, useEffect, useRef, Icon, Button, Eyebrow, Reveal, Brand, NDM, SERVICES, SHADES, REVIEWS, openBooking });
