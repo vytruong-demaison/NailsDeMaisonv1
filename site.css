@@ -249,10 +249,12 @@ html.anim .hero-scroll .ic { animation: ndm-bob 1.7s var(--ease-soft) infinite; 
 }
 .svc-tab:hover { border-color: var(--ink); color: var(--ink); }
 .svc-tab.active { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
-.svc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.svc-cols { display: grid; gap: 64px; }
+.svc-cols.cols-2 { grid-template-columns: 1fr 1fr; }
+.svc-cols.cols-1 { grid-template-columns: 1fr; max-width: 560px; margin: 0 auto; }
 .svc-col h3 {
   font-family: var(--font-display); font-weight: 400; font-size: 1.7rem;
-  display: flex; align-items: baseline; justify-content: space-between;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
   padding-bottom: 16px; border-bottom: 1px solid var(--ink); margin: 0 0 8px;
 }
 .svc-col h3 .ct { font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg3); }
@@ -430,6 +432,8 @@ html.anim .hero-scroll .ic { animation: ndm-bob 1.7s var(--ease-soft) infinite; 
   .nav, .hdr-cta .btn { display: none; }
   .hdr .menu-btn { display: inline-flex; }
   .about-grid, .svc-cols, .booking-grid, .footer-top { grid-template-columns: 1fr; gap: 44px; }
+  /* menu: one centered column on tablet/phone (beats the .cols-2 grid) */
+  .svc-cols.cols-2, .svc-cols.cols-1 { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; gap: 8px; }
   .steps { grid-template-columns: 1fr 1fr; gap: 36px 0; }
   .step { padding: 0 22px; } .step:nth-child(3) { border-left: none; padding-left: 0; }
   .grid-shades { grid-template-columns: repeat(3, 1fr); }
@@ -441,6 +445,24 @@ html.anim .hero-scroll .ic { animation: ndm-bob 1.7s var(--ease-soft) infinite; 
   .grid-shades { grid-template-columns: repeat(2, 1fr); }
   .hero-meta { gap: 18px; font-size: 0.7rem; }
   .book-card { padding: 32px 26px; }
+
+  /* Hero: flow content from the top (below the fixed header) instead of
+     vertically centering — centering let tall content overflow up behind
+     the header, colliding the hero emblem with the brand logo. Sizing to
+     content (min-height:auto) also removes the empty gap above the strip. */
+  .hero { min-height: auto; }
+  .hero-inner { justify-content: flex-start; padding-top: 100px; padding-bottom: 26px; }
+  .hero-emblem { width: 56px; height: 56px; margin-bottom: 12px; }
+  .hero h1 { font-size: clamp(2.3rem, 11vw, 3rem); }
+  .hero-sub { margin-top: 16px; }
+  .hero-cta { margin-top: 24px; }
+  .hero-scroll { margin-bottom: 22px; }
+
+  /* Tighten the generous desktop section rhythm so mobile isn't all gaps. */
+  .about, .services, .ritual, .gallery, .booking, .quote { padding: 64px 0; }
+  .footer { padding: 56px 0 32px; }
+  .ritual-head { margin-bottom: 40px; }
+  .gallery-head { margin-bottom: 28px; }
 }
 
 /* mobile menu overlay */

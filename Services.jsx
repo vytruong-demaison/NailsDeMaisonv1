@@ -38,8 +38,7 @@ function Services() {
           ))}
         </Reveal>
 
-        <Reveal className="svc-cols" delay={120}
-          style={{ gridTemplateColumns: tab === 'all' ? '1fr 1fr' : '1fr', maxWidth: tab === 'all' ? 'none' : 560, margin: tab === 'all' ? '0' : '0 auto' }}>
+        <Reveal className={`svc-cols ${tab === 'all' ? 'cols-2' : 'cols-1'}`} delay={120}>
           {showMani && <ServiceColumn data={SERVICES.manicure} />}
           {showPedi && <ServiceColumn data={SERVICES.pedicure} />}
         </Reveal>
