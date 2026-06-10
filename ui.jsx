@@ -36,6 +36,13 @@ function Icon({ name, className = 'ic', star }) {
 
 /* ---- Booking: open the calendar modal from anywhere ---- */
 function openBooking(detail) {
+  // Track every booking-modal open in GTM (build a conversion/retargeting
+  // trigger on the "booking_open" event). source tells button clicks apart
+  // from deep-link arrivals at /book.
+  (window.dataLayer = window.dataLayer || []).push({
+    event: 'booking_open',
+    source: (detail && detail.source) || 'button',
+  });
   window.dispatchEvent(new CustomEvent('ndm-book', { detail: detail || {} }));
 }
 

@@ -100,6 +100,15 @@ function BookingModal() {
   useEffect(() => {
     const onOpen = () => { resetAll(); setOpen(true); };
     window.addEventListener("ndm-book", onOpen);
+    // Deep link: arriving at /book (or ?book=1 / #book) opens the modal straight
+    // away, so ads and links can drop visitors right on the booking step.
+    const path = location.pathname.replace(/\/+$/, "");
+    if (path === "/book" ||
+        new URLSearchParams(location.search).has("book") ||
+        location.hash === "#book") {
+      (window.dataLayer = window.dataLayer || []).push({ event: "booking_open", source: "deeplink" });
+      onOpen();
+    }
     return () => window.removeEventListener("ndm-book", onOpen);
   }, []);
 

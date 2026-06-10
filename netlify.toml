@@ -12,5 +12,13 @@
   to = "/.netlify/functions/:splat"
   status = 200
 
+# Shareable booking link: /book serves the homepage (URL stays "/book") and the
+# booking modal auto-opens on arrival. Use this for ads, texts, and the GBP
+# "Book" button. status = 200 is a rewrite, so the address bar keeps reading /book.
+[[redirects]]
+  from = "/book"
+  to = "/index.html"
+  status = 200
+
 [functions]
   node_bundler = "esbuild"
