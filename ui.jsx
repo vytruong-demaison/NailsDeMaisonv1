@@ -133,12 +133,18 @@ const SERVICES = {
 };
 
 const SHADES = [
-  { src: 'assets/photos/shade-french.jpg', nm: 'French Ombré', fin: 'Gel' },
-  { src: 'assets/photos/shade-bow.jpg', nm: 'Ballet Bow', fin: 'Gel · 3D' },
-  { src: 'assets/photos/shade-hearts.jpg', nm: 'Sweetheart', fin: 'Hand painted' },
-  { src: 'assets/photos/shade-floral.jpg', nm: 'Wildflower', fin: 'Hand painted' },
-  { src: 'assets/photos/shade-chrome.jpg', nm: 'Silver Marble', fin: 'Chrome' },
-  { src: 'assets/photos/shade-leopard.jpg', nm: 'Cherry Leopard', fin: 'Hand painted' },
+  { src: 'assets/photos/work-01.jpg' },
+  { src: 'assets/photos/work-02.jpg' },
+  { src: 'assets/photos/work-03.jpg' },
+  { src: 'assets/photos/work-04.jpg' },
+  { src: 'assets/photos/work-05.jpg' },
+  { src: 'assets/photos/work-06.jpg' },
+  { src: 'assets/photos/work-07.jpg' },
+  { src: 'assets/photos/work-08.jpg' },
+  { src: 'assets/photos/work-09.jpg' },
+  { src: 'assets/photos/work-10.jpg' },
+  { src: 'assets/photos/work-11.jpg' },
+  { src: 'assets/photos/work-12.jpg' },
 ];
 
 /* ---- Curated Google reviews (real, hand-picked) ----
