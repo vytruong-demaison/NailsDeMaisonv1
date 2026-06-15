@@ -5,6 +5,7 @@
   "description": "Nails De Maison — static site with a branded Square Appointments booking calendar (Netlify Functions).",
   "scripts": {
     "catalog": "node scripts/square-catalog.js",
+    "set-prices": "node scripts/set-prices.js",
     "dev": "netlify dev"
   },
   "engines": {
