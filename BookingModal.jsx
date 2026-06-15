@@ -195,6 +195,11 @@ function BookingModal() {
             </div>
           ) : (
             <>
+              <div className="bm-promo">
+                <span className="tag">10% Off</span>
+                <span>Complete your booking below to claim 10% off your visit.</span>
+              </div>
+
               {/* 1 — date */}
               <div className="bm-section-label">1 · Pick a date</div>
               <Calendar month={month} setMonth={setMonth} date={date}

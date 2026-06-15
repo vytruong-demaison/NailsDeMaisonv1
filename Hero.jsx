@@ -24,7 +24,11 @@ function Hero() {
           Manicures and pedicures shaped with intention. A moment to slow down,
           cared for from the moment you arrive.
         </Reveal>
-        <Reveal as="div" className="hero-cta" delay={320}>
+        <Reveal as="button" className="hero-promo" delay={300} onClick={() => openBooking({ source: 'promo' })}>
+          <span className="tag">10% Off</span>
+          <span className="txt">Book online now to claim yours</span>
+        </Reveal>
+        <Reveal as="div" className="hero-cta" delay={380}>
           <Button variant="solid" icon="calendar" onClick={() => openBooking()}>Book Now</Button>
           <Button variant="outline" href="#services" icon="arrowRight">View Services</Button>
         </Reveal>

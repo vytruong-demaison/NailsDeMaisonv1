@@ -169,6 +169,24 @@ html.anim .reveal.in { transform: none; }
   color: var(--plum); max-width: 600px; margin: 20px auto 0; line-height: 1.5;
 }
 .hero-cta { display: flex; gap: 16px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+
+/* hero promo — gentle urgency nudge above the CTA buttons (the whole pill opens booking) */
+.hero-promo {
+  display: inline-flex; align-items: center; gap: 12px;
+  margin: 26px auto 0; padding: 8px 20px 8px 8px;
+  background: rgba(236, 201, 200, 0.45);
+  border: 1px solid var(--rose-pale); border-radius: 999px;
+  font-family: var(--font-sans); font-size: 0.95rem; color: var(--rose-deep);
+  cursor: pointer; box-shadow: 0 6px 22px rgba(154, 83, 106, 0.10);
+  transition: background var(--dur-fast) var(--ease-soft), box-shadow var(--dur-fast) var(--ease-soft), transform var(--dur-fast) var(--ease-soft);
+}
+.hero-promo:hover { background: rgba(236, 201, 200, 0.7); box-shadow: 0 10px 26px rgba(154, 83, 106, 0.18); transform: translateY(-1px); }
+.hero-promo .tag {
+  font-weight: 600; font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase;
+  background: var(--rose-deep); color: var(--ivory);
+  padding: 6px 13px; border-radius: 999px; white-space: nowrap;
+}
+.hero-promo .txt { font-weight: 500; letter-spacing: 0.01em; }
 .hero-meta {
   position: relative; z-index: 2; flex: none;
   padding: 0 24px 30px;
@@ -455,6 +473,8 @@ html.anim .hero-scroll .ic { animation: ndm-bob 1.7s var(--ease-soft) infinite; 
   .hero-emblem { width: 56px; height: 56px; margin-bottom: 12px; }
   .hero h1 { font-size: clamp(2.3rem, 11vw, 3rem); }
   .hero-sub { margin-top: 16px; }
+  .hero-promo { margin-top: 20px; font-size: 0.85rem; padding: 7px 16px 7px 7px; gap: 10px; }
+  .hero-promo .tag { font-size: 0.72rem; padding: 5px 11px; }
   .hero-cta { margin-top: 24px; }
   .hero-scroll { margin-bottom: 22px; }
 
@@ -499,6 +519,19 @@ html.anim .hero-scroll .ic { animation: ndm-bob 1.7s var(--ease-soft) infinite; 
 
 .bm-body { padding: 22px 32px 32px; }
 .bm-section-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg3); margin: 4px 0 12px; }
+/* offer reminder at the top of the booking flow */
+.bm-promo {
+  display: flex; align-items: center; gap: 11px;
+  margin: 0 0 20px; padding: 11px 15px;
+  background: rgba(236, 201, 200, 0.4);
+  border: 1px solid var(--rose-pale); border-radius: var(--r-sm);
+  font-family: var(--font-sans); font-size: 0.9rem; line-height: 1.4; color: var(--rose-deep);
+}
+.bm-promo .tag {
+  font-weight: 600; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+  background: var(--rose-deep); color: var(--ivory);
+  padding: 5px 11px; border-radius: 999px; white-space: nowrap; flex: none;
+}
 
 /* service chips */
 .bm-chips { display: flex; flex-wrap: wrap; gap: 8px; }
