@@ -34,7 +34,7 @@ function Hero() {
 
         {/* 1 — bold offer headline */}
         <Reveal as="h1" className="hero-offer" delay={140}>
-          Summer Sale — <span className="pct">10% Off</span><br />When You Book Online
+          Summer Sale <span className="pct">10% Off</span><br />When You Book Online
         </Reveal>
 
         {/* 2 — brand tagline, now the supporting line */}
