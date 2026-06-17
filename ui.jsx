@@ -103,7 +103,7 @@ const NDM = {
   email: 'v.kat.globaldemaison@gmail.com',
   address: '3264 Buford Dr, Buford, GA 30519',
   hours: [
-    ['Monday – Saturday', '10:00a — 7:00p'],
+    ['Monday – Saturday', '9:30a — 7:30p'],
     ['Sunday', '12:00p — 5:00p'],
   ],
   instagram: 'https://www.instagram.com/nailsdemaison/',
