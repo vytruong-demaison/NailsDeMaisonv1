@@ -19,6 +19,7 @@ const ICONS = {
   calendar: '<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>',
   check: '<polyline points="20 6 9 17 4 12"/>',
   clock4: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+  info: '<circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/>',
 };
 function Icon({ name, className = 'ic', star }) {
   if (star) {
@@ -109,6 +110,9 @@ const NDM = {
   facebook: 'https://www.facebook.com/profile.php?id=61583965245358',
   google: 'https://www.google.com/search?q=nailsdemaison&oq=nailsdemaison&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgkIARAAGA0YgAQyDwgCEC4YDRivARjHARiABDIJCAMQABgNGIAEMgkIBBAAGA0YgAQyBggFEEUYPDIGCAYQRRg9MgYIBxBFGD3SAQgyNDE2ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8',
   mapSrc: 'https://maps.google.com/maps?q=3264%20Buford%20Dr%2C%20Buford%2C%20GA%2030519&t=m&z=15&output=embed&iwloc=near',
+  // Aggregate Google rating, shown as social proof right at the booking CTAs.
+  googleRating: '4.9',
+  googleReviews: 29,
 };
 
 const SERVICES = {

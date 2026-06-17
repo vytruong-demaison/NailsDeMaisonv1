@@ -164,4 +164,23 @@ function Footer() {
     </footer>
   );
 }
-Object.assign(window, { Quote, Booking, Footer });
+/* Persistent Book Now CTA — a bottom bar on mobile, a fixed corner pill on
+   desktop. Hidden over the hero (its own CTA is on screen) and revealed once
+   the guest scrolls past it, so booking is always one tap away. Opens the same
+   modal as every other Book button. */
+function StickyBook() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > (window.innerHeight || 600) * 0.7);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return (
+    <div className={`sticky-book ${show ? 'show' : ''}`} aria-hidden={show ? undefined : true}>
+      <Button variant="solid" icon="calendar" tabIndex={show ? 0 : -1}
+        onClick={() => openBooking({ source: 'sticky' })}>Book Now &amp; Save 10%</Button>
+    </div>
+  );
+}
+Object.assign(window, { Quote, Booking, Footer, StickyBook });

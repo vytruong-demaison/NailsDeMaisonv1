@@ -8,8 +8,21 @@
    shown here and applied at checkout. Falls back to "please call us" on any API
    error. */
 
-/* ---- discount shown for booking online (applied at the salon) ---- */
+/* ---- discounts: 10% for booking online, 20% on "Sunday Funday" ----
+   The rate is keyed off the appointment's day in the salon's local time
+   (America/New_York) so a guest booking from another time zone still gets the
+   rate that matches the day they actually come in. Shown here, applied at the salon. */
 const ONLINE_DISCOUNT = 0.10;
+const SUNDAY_DISCOUNT = 0.20;
+const SALON_TZ = 'America/New_York';
+function isSalonSunday(when) {
+  if (!when) return false;
+  try {
+    return new Intl.DateTimeFormat('en-US', { timeZone: SALON_TZ, weekday: 'short' }).format(new Date(when)) === 'Sun';
+  } catch (_) { return false; }
+}
+function discountRate(when) { return isSalonSunday(when) ? SUNDAY_DISCOUNT : ONLINE_DISCOUNT; }
+function discountPct(when) { return Math.round(discountRate(when) * 100); }
 
 /* ---- date helpers ---- */
 function startOfDay(d) { const x = new Date(d); x.setHours(0, 0, 0, 0); return x; }
@@ -32,7 +45,7 @@ function money(n) {
   const v = Math.round(n * 100) / 100;
   return "$" + (Number.isInteger(v) ? v.toFixed(0) : v.toFixed(2));
 }
-function discounted(n) { return n == null ? null : n * (1 - ONLINE_DISCOUNT); }
+function discounted(n, when) { return n == null ? null : n * (1 - discountRate(when)); }
 
 /* ---- service display + grouping ----
    Names come straight from the Square catalog; we only tidy casing for display
@@ -307,14 +320,14 @@ function BookingModal() {
             <div className="bm-success">
               <div className="check"><Icon name="check" /></div>
               <h3>You're booked.</h3>
-              <p>Your visit is reserved. A confirmation is on its way by text and email.</p>
+              <p>Your visit is reserved and <strong>no payment was taken</strong> — a confirmation is on its way by text and email. You'll pay at the salon when you visit.</p>
               <div className="recap">
                 {svcLabel(success.service)}<br />
                 {fmtDate(success.startAt)}<br />{fmtTime(success.startAt)}
               </div>
               <div className="bm-success-price">
-                <s>{money(success.price)}</s> {money(discounted(success.price))}
-                <span> · 10% off · pay at the salon</span>
+                <s>{money(success.price)}</s> {money(discounted(success.price, success.startAt))}
+                <span> · {discountPct(success.startAt)}% off, applied at the salon</span>
               </div>
               <div style={{ marginTop: 22 }}>
                 <button className="btn btn-outline" onClick={resetAll}>Book another</button>
@@ -324,7 +337,11 @@ function BookingModal() {
             <>
               <div className="bm-promo">
                 <span className="tag">10% Off</span>
-                <span>Booking online gets you 10% off your visit — applied at the salon.</span>
+                <span>Book online and save 10% — or <strong>20% every Sunday</strong>. Applied at the salon.</span>
+              </div>
+              <div className="bm-paynote bm-paynote--intro">
+                <Icon name="info" className="ic" />
+                <span><strong>No payment here — this isn't a checkout.</strong> The price you see is the regular service price with your online discount applied. You'll only see your savings now and pay in person at the salon.</span>
               </div>
 
               {!service ? (
@@ -369,6 +386,9 @@ function BookingModal() {
                   {date && (
                     <>
                       <div className="bm-section-label" style={{ marginTop: 18 }}>3 · Choose a time</div>
+                      {date.getDay() === 0 && (
+                        <div className="bm-sunday-note"><span className="tag">Sunday Funday</span> 20% off applies to this date.</div>
+                      )}
                       {slotState === "loading" && (
                         <div className="bm-slots-msg"><span className="bm-spinner" /> Finding open times…</div>
                       )}
@@ -422,9 +442,13 @@ function BookingModal() {
                         <div className="row"><span>When</span><span>{fmtDate(slot.startAt)} · {fmtTime(slot.startAt)}</span></div>
                         <div className="row total">
                           <span>Price</span>
-                          <span><s>{money(service.price)}</s> {money(discounted(service.price))}</span>
+                          <span><s>{money(service.price)}</s> {money(discounted(service.price, slot.startAt))}</span>
                         </div>
-                        <div className="bm-discount">10% off applied · pay at the salon</div>
+                        <div className="bm-discount">{discountPct(slot.startAt)}% off — applied when you pay at the salon</div>
+                        <div className="bm-paynote">
+                          <Icon name="info" className="ic" />
+                          <span><strong>You won't be charged now.</strong> We're only showing your discounted price — booking just reserves your time. You'll pay in person at the salon when you visit.</span>
+                        </div>
                       </div>
                     </>
                   )}
@@ -434,7 +458,7 @@ function BookingModal() {
                   <div className="bm-foot">
                     <div className="bm-summary">
                       {slot ? (
-                        <><strong>{money(discounted(service.price))}</strong> · pay at salon</>
+                        <><strong>{money(discounted(service.price, slot.startAt))}</strong> · you pay at the salon, not now</>
                       ) : (
                         <span>Pick a date and time to continue.</span>
                       )}

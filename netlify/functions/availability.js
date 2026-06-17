@@ -12,6 +12,24 @@ const {
   maxBookingDate,
 } = require("./_square");
 
+/* Published salon hours, salon-local (America/New_York). 0 = Sun … 6 = Sat.
+   Square's availability occasionally surfaces a pre-open slot (e.g. 9:30a on a
+   weekday); we enforce the real opening time here so the picker never offers a
+   time before we're open. Sunday opens at noon; every other day at 10am. */
+const OPEN_HOUR = { 0: 12, 1: 10, 2: 10, 3: 10, 4: 10, 5: 10, 6: 10 };
+function withinSalonHours(iso) {
+  try {
+    const dt = new Date(iso);
+    const wd = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", weekday: "short" }).format(dt);
+    const hm = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", hour: "2-digit", minute: "2-digit", hour12: false }).format(dt);
+    const day = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 }[wd];
+    const [h, m] = hm.split(":").map(Number);
+    return (h % 24) * 60 + m >= (OPEN_HOUR[day] != null ? OPEN_HOUR[day] : 10) * 60;
+  } catch (_) {
+    return true; // never hide a slot on a parsing error
+  }
+}
+
 exports.handler = async (event) => {
   const pre = preflight(event);
   if (pre) return pre;
@@ -51,7 +69,7 @@ exports.handler = async (event) => {
       },
     });
 
-    const slots = (result.availabilities || []).map((a) => {
+    const slots = (result.availabilities || []).filter((a) => withinSalonHours(a.startAt)).map((a) => {
       const seg = (a.appointmentSegments || [])[0] || {};
       return {
         startAt: a.startAt,
