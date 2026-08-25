@@ -35,16 +35,25 @@ function Icon({ name, className = 'ic', star }) {
     dangerouslySetInnerHTML={{ __html: ICONS[name] }} />);
 }
 
-/* ---- Booking: open the calendar modal from anywhere ---- */
+/* ---- Booking: send every booking CTA to Square's hosted booking page ---- */
 function openBooking(detail) {
-  // Track every booking-modal open in GTM (build a conversion/retargeting
-  // trigger on the "booking_open" event). source tells button clicks apart
-  // from deep-link arrivals at /book.
+  // Track the click in GTM first (the "booking_open" event feeds the
+  // conversion/retargeting triggers), then hand off to Square. eventCallback
+  // fires once GTM has processed the event; the setTimeout is a safety net so
+  // a blocked or slow tag never strands the customer on this page.
+  let gone = false;
+  const go = () => {
+    if (gone) return;
+    gone = true;
+    window.location.assign(NDM.bookingUrl);
+  };
   (window.dataLayer = window.dataLayer || []).push({
     event: 'booking_open',
     source: (detail && detail.source) || 'button',
+    eventCallback: go,
+    eventTimeout: 400,
   });
-  window.dispatchEvent(new CustomEvent('ndm-book', { detail: detail || {} }));
+  setTimeout(go, 500);
 }
 
 /* ---- Button ---- */
@@ -97,9 +106,11 @@ function Brand({ onInk }) {
 const NDM = {
   phone: '(470) 899-8068',
   phoneHref: 'tel:+14708998068',
-  // Square Appointments booking widget (real scheduler — handles availability,
-  // confirmation, and text/email notifications to the salon).
-  square: 'https://app.squareup.com/appointments/buyer/widget/ytjq1rstefb3fj/LY8Q289WDMKMH',
+  // Square's hosted booking page (real scheduler — handles availability,
+  // confirmation, and text/email notifications to the salon). Every booking
+  // CTA sends customers here; the old in-site modal is retired because the
+  // Square plan no longer allows API bookings.
+  bookingUrl: 'https://book.squareup.com/appointments/mi5vkc02gemn0n/location/LY8Q289WDMKMH/services',
   email: 'v.kat.globaldemaison@gmail.com',
   address: '3264 Buford Dr, Buford, GA 30519',
   hours: [
@@ -173,3 +184,11 @@ const REVIEWS = [
 ];
 
 Object.assign(window, { useState, useEffect, useRef, Icon, Button, Eyebrow, Reveal, Brand, NDM, SERVICES, SHADES, REVIEWS, openBooking });
+
+// Deep link: /book (or ?book=1 / #book) — used in ads, texts, and the GBP
+// "Book" button — forwards straight to Square as well.
+if (/^\/book\/?$/.test(location.pathname) ||
+    new URLSearchParams(location.search).get('book') === '1' ||
+    location.hash === '#book') {
+  openBooking({ source: 'deeplink' });
+}
